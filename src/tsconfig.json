@@ -12,7 +12,12 @@
     "sourceMap": true,
     "target": "es5",
     "typeRoots": [
+<<<<<<< HEAD
+      "typings/global",
+      "typings/modules"
+=======
       "../node_modules/@types"
+>>>>>>> e0c07ec854c5c0a7aa2cbb9584bf3e4238245c58
     ]
   }
 }
