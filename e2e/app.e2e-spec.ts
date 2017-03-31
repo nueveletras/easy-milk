@@ -1,6 +1,6 @@
 import { EasyMilkPage } from './app.po';
 
-describe('easy-milk App', () => {
+describe('easy-milk App', function() {
   let page: EasyMilkPage;
 
   beforeEach(() => {
