@@ -1,22 +1,20 @@
-/* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { PotrerosListComponent } from './potreros-list.component';
 
-import { PotrerosComponent } from './potreros.component';
-
-describe('PotrerosComponent', () => {
-  let component: PotrerosComponent;
-  let fixture: ComponentFixture<PotrerosComponent>;
+describe('PotrerosListComponent', () => {
+  let component: PotrerosListComponent;
+  let fixture: ComponentFixture<PotrerosListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PotrerosComponent ]
+      declarations: [ PotrerosListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PotrerosComponent);
+    fixture = TestBed.createComponent(PotrerosListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
