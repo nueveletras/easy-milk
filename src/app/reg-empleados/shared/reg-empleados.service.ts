@@ -26,7 +26,7 @@ lastId: number = 0;
   // Simulate DELETE /empleados/:id
   deleteEmpleadosById(id: number):RegEmpleadosService {
     this.empleados = this.empleados
-    .filter(empleado => empleado.id !== id);
+    .filter(empleado => empleado.idUser !== id);
     return this;
   }
 
@@ -49,7 +49,7 @@ lastId: number = 0;
   // Simulate GET /empleados/:id
   getEmpleadosById(id: number): Empleados {
     return this.empleados.
-    filter(empleado => empleado.id === id).
+    filter(empleado => empleado.idUser === id).
     pop();
   }
 
