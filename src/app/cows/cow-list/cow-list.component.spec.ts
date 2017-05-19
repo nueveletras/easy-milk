@@ -1,22 +1,20 @@
-/* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { CowListComponent } from './cow-list.component';
 
-import { PotrerosComponent } from './potreros.component';
-
-describe('PotrerosComponent', () => {
-  let component: PotrerosComponent;
-  let fixture: ComponentFixture<PotrerosComponent>;
+describe('CowListComponent', () => {
+  let component: CowListComponent;
+  let fixture: ComponentFixture<CowListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PotrerosComponent ]
+      declarations: [ CowListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PotrerosComponent);
+    fixture = TestBed.createComponent(CowListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

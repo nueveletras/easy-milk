@@ -1,0 +1,86 @@
+<br>
+<font color="#045FB4">
+  <h2 align="center">Registro de potrero</h2>
+</font>
+<button type="button" class="btn btn-primary pull-left" 
+data-toggle="modal" data-target="#exampleModal">Registrar potrero</button>
+<br>
+<br>
+<br>
+<div class="container">
+ 
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>DESCRIPCION</th>
+        <th>AREA</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let potrero of potrerosList">
+        <td>{{potrero.idPastures}}</td>
+        <td>{{potrero.description}}</td>
+        <td>{{potrero.area}}</td>
+        <td><button type="button" (click)="onSelect(cow)" class="btn btn-primary">
+              <span class="fa fa-pencil"></span>
+          </button>
+          <button type="button" (click)="remove(cow)" class="btn btn-primary">
+              <span class="fa fa-trash"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nuevo Registro Potrero</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+   <form #potreroForm="ngForm" (ngSubmit)="save()">
+    <div class="form-group">
+      <label for="inputID" class="col-sm-5 control-label">
+			Número potrero:
+		</label>
+      <div class="col-sm-10">
+        <input type="number" [(ngModel)]="potrero.idPastures" name="ïnputID" (change)="onIdChange()" required [readOnly]="isEdit" class="form-control"
+          id="ïnputID" placeholder="Escribir el número de identificacion potrero">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputName" class="col-sm-5 control-label">
+			Descripcion:
+		</label>
+      <div class="col-sm-10">
+        <input type="text" [(ngModel)]="potrero.description" name="inputName" required class="form-control" id="inputName" placeholder="Escribir descripcion del potrero">
+      </div>
+    </div>
+     <div class="form-group">
+      <label for="inputID" class="col-sm-5 control-label">
+			Area Mt2:
+		</label>
+      <div class="col-sm-10">
+        <input type="number" [(ngModel)]="potrero.area" name="ïnputID" (change)="onIdChange()" required [readOnly]="isEdit" class="form-control"
+          id="ïnputID" placeholder="Escribir el area del potrero en Mt2">
+      </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      <button type="submit" [disabled]="!potreroForm.form.valid" class="btn btn-primary">Guardar</button>
+    </div>
+  </form>    
+
+  </div>
+  </div>
+</div>
