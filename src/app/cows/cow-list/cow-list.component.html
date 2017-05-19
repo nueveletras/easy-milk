@@ -1,0 +1,91 @@
+<font color="#01A9DB">
+  <h1 align="center">EasyMilk</h1>
+</font>
+<font color="#045FB4">
+  <h2 align="center">Registro de vaca</h2>
+</font>
+<div class="container">
+  <form #cowForm="ngForm" (ngSubmit)="save()">
+    <div class="form-group">
+      <label for="inputID" class="col-sm-2 control-label">
+			Número vaca:
+		</label>
+      <div class="col-sm-10">
+        <input type="number" [(ngModel)]="cow.id" name="ïnputID" (change)="onIdChange()" required [readOnly]="isEdit" class="form-control"
+          id="ïnputID" placeholder="Escribir el número de identificacion vaca">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputName" class="col-sm-2 control-label">
+			Nombre vaca:
+		</label>
+      <div class="col-sm-10">
+        <input type="text" [(ngModel)]="cow.name" name="inputName" required class="form-control" id="inputName" placeholder="Escribir el nombre de la vaca">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputBirthdate" class="col-sm-2 control-label">
+			Fecha de nacimiento:
+		</label>
+      <div class="col-sm-10">
+        <input type="date" [(ngModel)]="cow.birthDate" name="inputBirthdate" required class="form-control" id="inputBirthdate" placeholder="Ingresar la fecha de nacimiento">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputBuydate" class="col-sm-2 control-label">
+			Fecha de compra:
+		</label>
+      <div class="col-sm-10">
+        <input type="date" [(ngModel)]="cow.buyDate" name="inputBuydate" required class="form-control" id="inputBuydate" placeholder="Ingresar la fecha de compra">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="groupCow" class="col-sm-2 control-label">
+		    Grupo Vacas:
+		  </label>
+      <div class="col-sm-10">
+        <select [(ngModel)]="cow.idGroupCow" 
+              name="groupCow" 
+              required 
+              class="form-control" 
+              id="groupCow">
+            <option disabled>Seleccione un grupo de vacas</option>
+            <option *ngFor="let groupCow of groupCowsList"
+                    [ngValue]="groupCow">
+                    {{groupCow.name}}
+                    </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-offset-2 col-sm-10">
+      <input type="submit" [disabled]="!cowForm.form.valid" class="btn btn-info btn-block" value="Guardar">
+    </div>
+  </form>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NOMBRE</th>
+        <th>FECHA NACIMIENTO</th>
+        <th>FECHA COMPRA</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cow of cowsList">
+        <td>{{cow.id}}</td>
+        <td>{{cow.name}}</td>
+        <td>{{cow.birthDate | date: 'dd/MM/yyyy'}}</td>
+        <td>{{cow.buyDate | date: 'dd/MM/yyyy'}}</td>
+        <td><button type="button" (click)="onSelect(cow)" class="btn btn-primary">
+              <span class="fa fa-pencil"></span>
+          </button>
+          <button type="button" (click)="remove(cow)" class="btn btn-primary">
+              <span class="fa fa-trash"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
