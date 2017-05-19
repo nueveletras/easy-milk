@@ -1,3 +1,42 @@
-<h1>
-  {{title}}
-</h1>
+<div class="w3-container w3-light-blue" style="padding: 1%;">
+  <h1 style="color: #045FB4; text-align: center; "> EasyMilk </h1>
+</div>
+
+<div class="tab" style="padding-left: 25%">
+  <button class="tablinks" onclick="openMenu(event, 'Registros')" id="defaultOpen" >Registros</button>
+  <button class="tablinks" onclick="openMenu(event, 'Estadisticas')" >Estadisticas</button>
+  <button class="tablinks" onclick="openMenu(event, 'Noticias')" >Noticias</button>
+</div>
+
+<div class="container" style="color:#045FB4; position: absolute; margin-left: 25%; padding: 5%; ">
+<p id="help"></p>
+<router-outlet></router-outlet>
+	</div>
+<input type="text" name="" id="asd" value="kaushfi" style="display: none;">
+
+<div class="vertical-menu" id="Registros">
+  <a href="#" class="active">Info</a>
+  <a routerLink="/cows" onmouseover="vaca()">Consulta vaca</a>  
+  <a href="reg_potreros.html" onmouseover="potrero()">Registro Potrero</a>
+  <a href="reg_leche.html" onmouseover="leche()">Cantidad Leche</a>
+  <a routerLink="/production" onmouseover="leche()">Produccion</a>
+  
+  
+</div>
+
+<div class="vertical-menu" id="Estadisticas">
+  <a href="#" class="active">Info</a>
+  <a href="#">Vacas</a>
+  <a href="#">potreros</a>
+  <a href="#">Leche</a>
+  
+</div>
+
+<div class="vertical-menu" id="Noticias">
+  <a href="#" class="active">Info</a>
+  <a href="#">Ganado</a>
+  <a href="#">Herramientas</a>
+  <a href="#">Calidad</a>
+  
+</div>
+

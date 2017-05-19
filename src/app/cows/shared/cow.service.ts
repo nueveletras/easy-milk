@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Cow } from './cow.model';
+import { Http, Headers, RequestOptions } from "@angular/http";
+import { environment } from "environments/environment";
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class CowService {
@@ -9,16 +14,16 @@ export class CowService {
   //List of cows
   cows: Cow[] = [];
 
-  constructor() { }
+  constructor(private http: Http) { }
 
   // Simulate POST /cows
-  addCow(cow: Cow): CowService {
-    if (!cow.id) {
-      cow.id = ++this.lastId;
-    }
-    this.cows.push(cow);
-    return this;
-  }
+  addCow(cow: Cow): Observable<string> {
+  let headerVar= new Headers({'Content-Type': 'aplication/json'});
+  let optionVar = new RequestOptions({headers: headerVar});
+  return this.http.post(environment.BACKEND_URL+'cows', cow, optionVar)
+  .map (res=>  res.json());
+}
+
 
   // Simulate DELETE /cows/:id
   deleteCowById(id: number):CowService {
@@ -38,8 +43,9 @@ export class CowService {
   }
 
   // Simulate GET /cows
-  getAllCows(): Cow[] {
-    return this.cows;
+  getAllCows(): Observable<Cow[]> {
+    return this.http.get(environment.BACKEND_URL+'cows')
+    .map( res => res.json() as Cow[]);
   }
 
   // Simulate GET /cows/:id
