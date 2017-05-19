@@ -9,7 +9,7 @@ import { HomeModule } from "app/home/home.module";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

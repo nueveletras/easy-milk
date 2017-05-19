@@ -10,6 +10,9 @@ import { GroupCowService } from "app/groups-cows/shared/group-cow.service";
     GroupsCowsRoutingModule
   ],
   declarations: [],
-  providers: [GroupCowService]
+
+  providers: [
+    GroupCowService
+  ]
 })
 export class GroupsCowsModule { }

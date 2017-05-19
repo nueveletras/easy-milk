@@ -1,8 +1,8 @@
 export class GroupCow {
-    idGroupCows: number;
+    idGroupCow: number;
     name: string;
 
-    constructor(values: Object={}){
-        Object.assign(this, values)
+    constructor(values: Object = {}) {
+        Object.assign(this, values);
     }
 }

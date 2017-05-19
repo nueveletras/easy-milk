@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { HomeRoutingModule } from './home-routing.module';
-import { HomeComponent } from './home.component';
-import { CowsModule } from "app/cows/cows.module";
 import { ProductionModule } from "app/production/production.module";
-import { GroupsCowsModule } from "app/groups-cows/groups-cows.module";
 import { CalidadLecheModule } from "app/calidad-leche/calidad-leche.module";
+import { HomeComponent } from './home.component';
+import { HomeRoutingModule } from "app/home/home-routing.module";
+import { CowsModule } from "app/cows/cows.module";
+import { GroupsCowsModule } from "app/groups-cows/groups-cows.module";
+import { PotrerosModule } from "app/potreros/potreros.module";
 
 @NgModule({
   imports: [
@@ -15,6 +15,7 @@ import { CalidadLecheModule } from "app/calidad-leche/calidad-leche.module";
     ProductionModule,
     GroupsCowsModule,
     CalidadLecheModule,
+    PotrerosModule,
     HomeRoutingModule
   ],
   declarations: [HomeComponent]

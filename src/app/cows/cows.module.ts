@@ -14,6 +14,9 @@ import { CowService } from "app/cows/shared/cow.service";
     CowsRoutingModule
   ],
   declarations: [CowListComponent, CowCreateComponent],
-  providers:[ CowService ]
+
+  providers: [
+    CowService
+  ]
 })
 export class CowsModule { }

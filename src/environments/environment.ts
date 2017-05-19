@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  BACKEND_URL:'http://localhost:8080/EaskMilk/api/'
+
+  BACKEND_URL: 'http://localhost:8080/EasyMilk/api/'
 };

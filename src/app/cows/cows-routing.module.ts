@@ -4,8 +4,8 @@ import { CowListComponent } from "app/cows/cow-list/cow-list.component";
 import { CowCreateComponent } from "app/cows/cow-create/cow-create.component";
 
 const routes: Routes = [
-  {path: 'cows', component: CowListComponent }
-  
+
+  { path: 'cows', component: CowListComponent }
 ];
 
 @NgModule({

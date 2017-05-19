@@ -10,10 +10,10 @@ import { GroupCow } from "app/groups-cows/shared/group-cow.model";
   styleUrls: ['./cow-list.component.css']
 })
 export class CowListComponent implements OnInit {
-    groupCowList: GroupCow[];
 
   cow: Cow;
-  cowList: Cow[];
+  cowsList: Cow[];
+  groupCowsList: GroupCow[];
   isEdit: boolean;
   errorMessage: any;
 
@@ -21,20 +21,22 @@ export class CowListComponent implements OnInit {
     private groupCowService: GroupCowService) { }
 
   ngOnInit() {
+
+    this.isEdit = false;
     this.cow = new Cow();
     this.getAllCows();
-    this.isEdit = false;
     this.getAllGroupCows();
   }
+
   save() {
-    if(this.cow.birthDate){
-      this.cow.birthDate =new Date(this.cow.birthDate);
+    if(this.cow.birthDate) {
+      this.cow.birthDate = new Date(this.cow.birthDate);
     }
-    if(this.cow.buyDate){
-      this.cow.buyDate =new Date(this.cow.buyDate);
+    if(this.cow.buyDate) {
+      this.cow.buyDate = new Date(this.cow.buyDate);
     }
     if (this.cowService.getCowById(this.cow.id)) {
-      this.cowService.updateCowById(this.cow.id, this.cow)
+      this.cowService.updateCowById(this.cow.id, this.cow);
     } else {
       this.cowService.addCow(this.cow)
         .subscribe(
@@ -47,36 +49,37 @@ export class CowListComponent implements OnInit {
     this.getAllCows();
   }
 
-  onSelect(cow: Cow) {
-    this.cow = cow;
-    this.isEdit = true;
-  }
-
-  onIdChange() {
-    const verifyCow = this.cowService.getCowById(this.cow.id);
-    if (verifyCow) {
-      this.isEdit = true;
-      this.cow = verifyCow;
-    }
-  }
   remove(cow: Cow) {
     this.cowService.deleteCowById(cow.id);
     this.getAllCows();
   }
 
+  onSelect(cow: Cow) {
+    this.isEdit = true;
+    this.cow = cow;
+  }
+
+  onIdChange() {
+    const cow = this.cowService.getCowById(this.cow.id);
+    if (cow) {
+      this.isEdit = true;
+      this.cow = cow;
+    }
+  }
+
   getAllCows() {
     return this.cowService.getAllCows()
       .subscribe(
-      variableCows => this.cowList = variableCows,
-      errorVariable => this.errorMessage = errorVariable = <any>errorVariable
+      cows => this.cowsList = cows,
+      error => this.errorMessage = <any>error
       )
   }
 
   getAllGroupCows() {
-    return this.groupCowService.getAllGroups()
+    return this.groupCowService.getAllGroupsCows()
       .subscribe(
-      variablegroupsCows => this.groupCowList = variablegroupsCows,
-      errorVariable => this.errorMessage = errorVariable = <any>errorVariable
+      groupsCows => this.groupCowsList = groupsCows,
+      error => this.errorMessage = <any>error
       )
   }
 }
