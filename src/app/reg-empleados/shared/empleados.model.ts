@@ -1,13 +1,13 @@
 export class Empleados {
     name: string;
     lastName: string;
-    id: number;
+    idUser: number;
     documentType: string;
     document: string;
-    tel: number;
+    phone: number;
     address: string;
     rol: string;
-    contractingDate: Date;
+    hireDate: Date;
     fireDate: Date;
 
     constructor(values: Object = {}) {

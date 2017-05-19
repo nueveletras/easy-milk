@@ -19,20 +19,20 @@
             <th>Dirección</th>
             <th>Cargo que desempeña</th>
             <th>Fecha de contratación</th>
-            <th style="width: 130px"></th>
+            <th style="width: 150px"></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let empleados of regempleadosList" >
-            <td>{{empleados.id}}</td>
+            <td>{{empleados.idUser}}</td>
             <td>{{empleados.name}}</td>
             <td>{{empleados.lastName}}</td>
             <td>{{empleados.documentType}}</td>
             <td>{{empleados.document}}</td>
-            <td>{{empleados.tel}}</td>
+            <td>{{empleados.phone}}</td>
             <td>{{empleados.address}}</td>
             <td>{{empleados.rol}}</td>
-            <td>{{empleados.contractingDate | date: 'dd/MM/yyyy'}}</td> 
+            <td>{{empleados.hireDate | date: 'dd/MM/yyyy'}}</td> 
             <td><button type="button" 
             (click)="onSelect(empleados)"
             class="btn btn-primary">
@@ -135,7 +135,7 @@
             type="number" 
             class="form-control" 
             id="tel"
-            [(ngModel)]="regempleados.tel"
+            [(ngModel)]="regempleados.phone"
             name="tel"
             placeholder="Ingrese su teléfono">
           </div>
@@ -166,14 +166,14 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="contractingDate" class="col-sm-2 control-label">Fecha de contratación: </label>
+          <label for="hireDate" class="col-sm-2 control-label">Fecha de contratación: </label>
           <div class="col-sm-10">
             <input required
             type="date" 
             class="form-control" 
-            id="contractingDate"
-            [(ngModel)]="regempleados.contractingDate"
-            name="contractingDate"
+            id="hireDate"
+            [(ngModel)]="regempleados.hireDate"
+            name="hireDate"
             placeholder="ingrese su fecha de contratación">
           </div>
         </div>

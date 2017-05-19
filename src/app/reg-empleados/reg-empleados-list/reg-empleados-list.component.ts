@@ -26,11 +26,11 @@ errorMessage: any;
   }
 
   save(){
-    if(this.regempleados.contractingDate){
-      this.regempleados.contractingDate = new Date(this.regempleados.contractingDate);
+    if(this.regempleados.hireDate){
+      this.regempleados.hireDate = new Date(this.regempleados.hireDate);
     }
-    if(this.regEmpleadosService.getEmpleadosById(this.regempleados.id)){
-      this.regEmpleadosService.updateEmpleadosById(this.regempleados.id, this.regempleados);
+    if(this.regEmpleadosService.getEmpleadosById(this.regempleados.idUser)){
+      this.regEmpleadosService.updateEmpleadosById(this.regempleados.idUser, this.regempleados);
     } else {
       this.regEmpleadosService.addEmpleados(this.regempleados)
       .subscribe(
@@ -44,7 +44,7 @@ errorMessage: any;
   
    }
    remove(regempleados: Empleados){
-     this.regEmpleadosService.deleteEmpleadosById(regempleados.id);
+     this.regEmpleadosService.deleteEmpleadosById(regempleados.idUser);
      this.getAllEmpleados();
    }
 
@@ -56,7 +56,7 @@ errorMessage: any;
    }
 
    onIdChange(){
-    const verifyEmpleados = this.regEmpleadosService.getEmpleadosById(this.regempleados.id);
+    const verifyEmpleados = this.regEmpleadosService.getEmpleadosById(this.regempleados.idUser);
     if (verifyEmpleados) {
       this.isEdit = true;
       this.regempleados = verifyEmpleados;
