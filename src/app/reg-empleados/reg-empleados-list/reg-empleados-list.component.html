@@ -1,0 +1,192 @@
+<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">
+            Registrar Empleado
+            </button>
+
+    <font color="#045FB4"><h2 align="center">Registro de Empleados</h2></font>
+    
+    <div class="container">
+
+      
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>tipo de documento</th>
+            <th>Número de documento</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Cargo que desempeña</th>
+            <th>Fecha de contratación</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let empleados of regempleadosList" >
+            <td>{{empleados.id}}</td>
+            <td>{{empleados.name}}</td>
+            <td>{{empleados.lastName}}</td>
+            <td>{{empleados.documentType}}</td>
+            <td>{{empleados.document}}</td>
+            <td>{{empleados.tel}}</td>
+            <td>{{empleados.address}}</td>
+            <td>{{empleados.rol}}</td>
+            <td>{{empleados.contractingDate | date: 'dd/MM/yyyy'}}</td> 
+            <td><button type="button" 
+            (click)="onSelect(empleados)"
+            class="btn btn-primary">
+              <span class="fa fa-pencil"></span>
+              </button>
+              <button type="button" 
+            (click)="remove(empleados)"
+            class="btn btn-primary">
+              <span class="fa fa-trash"></span>
+              </button></td>   
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registro</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form #regEmpleadosForm="ngForm" (ngSubmit)="save()">
+      <div class="modal-body">
+        
+        <div class="form-group">
+
+          <div class="form-group">
+          <label for="documentType" class="col-sm-2 control-label">Tipo de documento: </label>
+          <div class="col-sm-10">
+            <select required
+            (change)="onIdChange()"
+            [disabled]="isEdit"
+            class="form-control" 
+            id="documentType"
+            [(ngModel)]="regempleados.documentType"
+            name="documentType"
+            placeholder="Tipo de documento">
+            <option disabled>seleccione el tipo de documento</option>
+            <option value="CC">Cédula de ciudadania</option>
+            <option value="CE">Cédula extrangera</option>
+            <option value="PT">Pasaporte</option>
+            <option value="CE">Cédula extrangera</option>
+            <option value="TI">Tarjeta de identidad</option>
+            <option value="NIT">Persona juridica</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="EmpCedula" class="col-sm-2 control-label">Número de documento: </label>
+          <div class="col-sm-10">
+            <input required
+            type="number" 
+            (change)="onIdChange()"
+            [disabled]="isEdit"
+            class="form-control" 
+            id="EmpCedula"
+            [(ngModel)]="regempleados.document"
+            name="EmpCedula"
+            placeholder="Ingrese su documento">
+          </div>
+        </div>
+
+        
+
+          <label for="NombreEmp" class="col-sm-2 control-label"> Nombre: </label>
+          
+          <div class="col-sm-10">
+            <input required 
+            type="text" 
+            class="form-control"
+             id="NombreEmp" 
+             [(ngModel)]="regempleados.name"
+             name="NombreEmp"
+             placeholder="Ingrese su nombre">
+          </div>
+        </div>
+
+      <div class="form-group">
+        <label for="lastName" class="col-sm-2 control-label"> Apellidos: </label>
+          
+          <div class="col-sm-10">
+            <input required 
+            type="text" 
+            class="form-control"
+             id="lastName" 
+             [(ngModel)]="regempleados.lastName"
+             name="lastName"
+             placeholder="Ingrese sus Apellidos">
+          </div>
+        </div>
+       
+        <div class="form-group">
+          <label for="tel" class="col-sm-2 control-label">Teléfono</label>
+          <div class="col-sm-10">
+            <input required 
+            type="number" 
+            class="form-control" 
+            id="tel"
+            [(ngModel)]="regempleados.tel"
+            name="tel"
+            placeholder="Ingrese su teléfono">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="address" class="col-sm-2 control-label">Dirección: </label>
+          <div class="col-sm-10">
+            <input required
+            type="text" 
+            class="form-control" 
+            id="address"
+            [(ngModel)]="regempleados.address"
+            name="address"
+            placeholder="Ingrese su dirección">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="rol" class="col-sm-2 control-label">Cargo que desempeña: </label>
+          <div class="col-sm-10">
+            <input required
+            type="text" 
+            required
+            class="form-control" 
+            id="rol"
+            [(ngModel)]="regempleados.rol"
+            name="rol"
+            placeholder="ingrese su cargo ">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="contractingDate" class="col-sm-2 control-label">Fecha de contratación: </label>
+          <div class="col-sm-10">
+            <input required
+            type="date" 
+            class="form-control" 
+            id="contractingDate"
+            [(ngModel)]="regempleados.contractingDate"
+            name="contractingDate"
+            placeholder="ingrese su fecha de contratación">
+          </div>
+        </div>
+        
+   
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="submit" [disabled]="!regEmpleadosForm.form.valid" class="btn btn-primary">Guardar</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+

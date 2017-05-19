@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Cow } from './cow.model';
+import { Http } from "@angular/http";
+import { environment } from "environments/environment";
+import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class CowService {
@@ -9,7 +12,7 @@ export class CowService {
   //List of cows
   cows: Cow[] = [];
 
-  constructor() { }
+  constructor(private http: Http) { }
 
   // Simulate POST /cows
   addCow(cow: Cow): CowService {
@@ -38,8 +41,10 @@ export class CowService {
   }
 
   // Simulate GET /cows
-  getAllCows(): Cow[] {
-    return this.cows;
+  getAllCows(): Observable<Cow[]> {
+    return this.http.get(environment.BACKEND_URL + 'COWS')
+    .map(res =>res.json() as Cow[]);
+    
   }
 
   // Simulate GET /cows/:id

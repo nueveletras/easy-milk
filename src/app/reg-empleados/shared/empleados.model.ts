@@ -1,10 +1,14 @@
 export class Empleados {
     name: string;
+    lastName: string;
     id: number;
+    documentType: string;
+    document: string;
     tel: number;
-    adress: string;
+    address: string;
     rol: string;
-    ContractingDate: Date;
+    contractingDate: Date;
+    fireDate: Date;
 
     constructor(values: Object = {}) {
         Object.assign(this, values);
