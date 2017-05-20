@@ -34,7 +34,7 @@
             <td>{{empleados.rol}}</td>
             <td>{{empleados.hireDate | date: 'dd/MM/yyyy'}}</td> 
             <td><button type="button" 
-            (click)="onSelect(empleados)"
+            (click)="onSelect(empleados)" data-toggle="modal" data-target="#exampleModal"
             class="btn btn-primary">
               <span class="fa fa-pencil"></span>
               </button>
@@ -182,7 +182,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="submit" [disabled]="!regEmpleadosForm.form.valid" class="btn btn-primary">Guardar</button>
+        <button type="submit" [disabled]="!regEmpleadosForm.form.valid" data-dismiss="modal" class="btn btn-primary">Guardar</button>
       </div>
       </form>
     </div>

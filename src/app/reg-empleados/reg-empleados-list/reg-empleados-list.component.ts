@@ -26,6 +26,10 @@ message: string;
     this.getAllEmpleados();
   }
 
+  nuevoEmpleado(){
+  this.regempleados = new Empleados();
+  }
+
   save(){
     if(this.regempleados.hireDate){
       this.regempleados.hireDate = new Date(this.regempleados.hireDate);
