@@ -1,60 +1,119 @@
+<br>
+<font color="#045FB4">
+	<h2 align="center">Registro de producción</h2>
+</font>
+<button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target="#productionModal">Registrar producción</button>
+<br>
+<br>
+<br>
+<div class="container">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>ID producción</th>
+				<th>ID vaca</th>
+				<th>Litros</th>				
+				<th>Fecha Registro</th>
+				<th>Empleado</th>
+				
+				<th style="width: 130px"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let production of productionList">
+				<td>{{production.idProduction}}</td>
+				<td>{{production.idCow.name}}</td>
+				<td>{{production.liters}}</td>
+				<td>{{production.idQuality.description}}</td>
+				<td>{{production.idUserRegister.name}}</td>
+				
+				<td><button type="button" (click)="onSelect(production)" class="btn btn-primary">
+              <span class="fa fa-pencil"></span>
+          </button>
+					<button type="button" (click)="remove(production)" class="btn btn-primary">
+              <span class="fa fa-trash"></span>
+          </button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
 
-<form class="form-horizontal">
-	<div class="form-group">
-		<label for="inputID" class="col-sm-2 control-label">
-			ID Vaca:
-		</label>
-		<div class="col-sm-10">
-		<input required="required" type="number" class="form-control" id="ïmputID" placeholder="Escribir el número de identificacion vaca.">
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="ImputDate" class="col-sm-2 control-label">
-			Fecha de registro:
-		</label>
-		<div class="col-sm-5">
-		<input required="required" type="date" class="form-control" id="ImputDate" placeholder="Ingrese fecha de registro">
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="LitersAmount" class="col-sm-2 control-label">
-			Cantidad de Leche:
-		</label>
-		<div class="col-sm-5">
-		<input required="required" type="number" class="form-control" id="LitersAmount" placeholder="Ingrese la cantidad (Litros) de leche recolectada. ">
-		</div>
-	</div>
-	
-	<div class="form-group">
-		<label for="EmployeeID" class="col-sm-2 control-label">
-			ID empleado:
-		</label>
-		<div class="col-sm-5">
-		<input required type="number" class="form-control" id="EmployeeID" placeholder="Ingrese su ID">
-		</div>
-	</div>
+<div id="productionModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Registro producción</h4>
+      </div>
 
-<div class="form-group">
-		<label for="milkQuality"class="col-sm-2 control-label">
-			Calidad leche
-		</label>
-		<div class="col-sm-10">
-		<select
-		[(ngModel)]="idProduction.idQuality"
-		name="milkQuality"
-		required 
-		class="form-control" 
-		id="milkQuality">
-		<option disabled> Seleccione calidad</option>
-		<option *ngFor="let milkQuality of qualityList"
-		[ngValue]="milkQuality"> 
-		{{milkQuality.description}}
-		 </option>
-		</select>
-		</div>
-	</div>
+      <div class="modal-body">
+				<form class="form-horizontal" #productionForm="ngForm" (ngSubmit)="save()">
+					<div class="form-group">
+					<label for="inputID" class="col-sm-5 control-label">
+						ID vaca:
+					</label>
+					<div class="col-sm-10">
 
-	<div class="col-sm-offset-2 col-sm-10">
-	<input type="submit" class="btn btn-info btn-block" value="Guardar">	
-	</div>
-</form>
+					<select [(ngModel)]="Production.idCow" name="idVaca" id="idVaca" class="form-control" placeholder="Seleccione vaca" required>
+					<option disabled>Seleccion vaca</option>
+					<option *ngFor="let idVaca of cowsList"
+                    [ngValue]="idVaca">
+                    {{idVaca.id}} - {{idVaca.name}}
+					</option>
+					</select>
+					</div>
+					</div>
+
+					<div class="form-group">
+					<label for="inputID" class="col-sm-5 control-label">
+						Cantidad leche
+					</label>
+          <div class="col-sm-10">
+            <input type="number" [(ngModel)]="Production.liters" name="inputLitters" required class="form-control" id="inputLiters" placeholder="Ingrese candidad leche">
+          </div>
+					</div>
+					<div class="form-group">
+				<div class="col-sm-10">
+					<label for="Quality" class="col-sm-10 control-label">
+						Seleccione calidad de la leche
+					</label>
+					<select [(ngModel)]="Production.idQuality" name="milkQuality" required class="form-control" id="milkQuality">
+					<option disabled> Seleccione calidad</option>
+					<option *ngFor="let milkQuality of qualityList"
+									[ngValue]="milkQuality">
+					{{milkQuality.description}}
+				  </option>
+					</select>
+					</div>
+					</div>
+
+					<div class="form-group">
+					<label for="EmployeeID" class="col-sm-5 control-label">
+						Ingrese su ID
+					</label>
+          <div class="col-sm-10">
+					<select [(ngModel)]="Production.idUserRegister" name="milkQuality" required class="form-control" id="userRegister">
+					<option disabled> Seleccione calidad</option>
+					<option *ngFor="let idUser of employeeList"
+									[ngValue]="idUser">
+					{{idUser.name}}
+				  </option>
+					</select>
+          </div>
+        </div>
+
+				<div class="modal-footer">
+          <input type="submit" [disabled]="!productionForm.form.valid" class="btn btn-info btn-block" value="Guardar">
+        </div>
+				</form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
