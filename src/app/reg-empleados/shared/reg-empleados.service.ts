@@ -8,36 +8,30 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class RegEmpleadosService {
-lastId: number = 0;
 
-  //List of empleados
-  empleados: Empleados[] = [];
+  headers = new Headers({'Content-Type': 'application/json' });
+  options = new RequestOptions({ headers: this.headers });
 
   constructor(private http: Http) { }
 
   //POST /empleados
   addEmpleados(empleado: Empleados): Observable<string> {
-    let headers = new Headers({'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.post(environment.BACKEND_URL + 'users',empleado, options)
+    
+    return this.http.post(environment.BACKEND_URL + 'users',empleado, this.options)
     .map(res => res.json());
   }
 
-  // Simulate DELETE /empleados/:id
-  deleteEmpleadosById(id: number):RegEmpleadosService {
-    this.empleados = this.empleados
-    .filter(empleado => empleado.idUser !== id);
-    return this;
+  // DELETE /empleados/:id
+  deleteEmpleadosById(id: number):Observable<string> {
+    return this.http.delete(environment.BACKEND_URL + 'users/' + id)
+    .map(res => res.json());
   }
 
   // Simulta PUT /empleados/:id
-  updateEmpleadosById(id: number, values: Object = {}): Empleados {
-    let empleado = this.getEmpleadosById(id);
-    if(!empleado) {
-      return null;
-    }
-    Object.assign(empleado, values);
-    return empleado;
+  updateEmpleadosById(id: number, empleado: Empleados): Observable<string> {
+    return this.http.put(environment.BACKEND_URL + 'users/' + id, empleado, this.options)
+    .map(res => res.json());
+    
   }
 
   // Simulate GET /empleados
@@ -47,10 +41,10 @@ lastId: number = 0;
   }
 
   // Simulate GET /empleados/:id
-  getEmpleadosById(id: number): Empleados {
-    return this.empleados.
-    filter(empleado => empleado.idUser === id).
-    pop();
+  getEmpleadosById(id: number): Observable<Empleados> {
+    return this.http.get(environment.BACKEND_URL+ 'users/' + id)
+    .map(res => res.json() as Empleados);
+    
   }
 
 }

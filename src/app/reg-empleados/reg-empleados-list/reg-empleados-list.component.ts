@@ -15,6 +15,7 @@ regempleados: Empleados;
 regempleadosList:Empleados[];
 isEdit:boolean;
 errorMessage: any;
+message: string;
 
 
   constructor(private regEmpleadosService: RegEmpleadosService) {}
@@ -25,27 +26,52 @@ errorMessage: any;
     this.getAllEmpleados();
   }
 
+  nuevoEmpleado(){
+  this.regempleados = new Empleados();
+  }
+
   save(){
     if(this.regempleados.hireDate){
       this.regempleados.hireDate = new Date(this.regempleados.hireDate);
     }
-    if(this.regEmpleadosService.getEmpleadosById(this.regempleados.idUser)){
-      this.regEmpleadosService.updateEmpleadosById(this.regempleados.idUser, this.regempleados);
+    
+    if (this.isEdit) {
+      this.regEmpleadosService.updateEmpleadosById(this.regempleados.idUser, this.regempleados)
+      .subscribe(
+        message => {
+          this.isEdit = false;
+          this.message = message;
+          this.regempleados = new Empleados();
+          this.getAllEmpleados();
+        },
+        error => this.errorMessage = <any>error
+      
+      );
+
     } else {
       this.regEmpleadosService.addEmpleados(this.regempleados)
       .subscribe(
-        message => {console.log(message);
+        message => {
+          console.log(message);
           this.isEdit = false;
           this.regempleados = new Empleados();
-          this.getAllEmpleados();},
+          this.getAllEmpleados();
+        },
         error => this.errorMessage = <any>error
       );
     }
   
    }
    remove(regempleados: Empleados){
-     this.regEmpleadosService.deleteEmpleadosById(regempleados.idUser);
-     this.getAllEmpleados();
+     this.regEmpleadosService.deleteEmpleadosById(regempleados.idUser)
+     .subscribe(
+       message => {       
+          this.message = message;
+          this.getAllEmpleados();
+        },
+        error => this.errorMessage = <any>error
+     );
+     
    }
 
 
@@ -56,13 +82,13 @@ errorMessage: any;
    }
 
    onIdChange(){
-    const verifyEmpleados = this.regEmpleadosService.getEmpleadosById(this.regempleados.idUser);
-    if (verifyEmpleados) {
-      this.isEdit = true;
-      this.regempleados = verifyEmpleados;
-
-        }
-
+    this.regEmpleadosService.getEmpleadosById(this.regempleados.idUser)
+    .subscribe(
+      regempleados => {
+        this.isEdit = true;
+        this.regempleados = regempleados;
+      }
+    );
    }
 
    getAllEmpleados(){

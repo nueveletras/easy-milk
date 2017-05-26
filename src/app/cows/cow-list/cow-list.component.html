@@ -10,6 +10,7 @@
   <table class="table">
     <thead>
       <tr>
+        <th>GRUPO</th>
         <th>ID</th>
         <th>NOMBRE</th>
         <th>FECHA NACIMIENTO</th>
@@ -19,6 +20,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let cow of cowsList">
+        <td>{{cow.idGroupCow.name}}</td>
         <td>{{cow.id}}</td>
         <td>{{cow.name}}</td>
         <td>{{cow.birthDate | date: 'dd/MM/yyyy'}}</td>
